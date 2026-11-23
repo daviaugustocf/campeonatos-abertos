@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#170c2b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Campeonatos">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="./icone.svg">
+<title>Campeonatos abertos</title>
+<link rel="stylesheet" href="./app.css">
+</head>
+<body>
+<div class="shell">
+<header><div class="eyebrow" id="headerEyebrow">Pontos corridos</div><h1>Campeonatos abertos</h1><p id="headerDescription">Todos contra todos. Acompanhe cada jogo.</p></header>
+<nav class="nav" aria-label="Navegação principal"><button type="button" data-page="classificacao" aria-current="page">Classificação</button><button type="button" data-page="jogos">Jogos</button><button type="button" data-page="configuracoes">Configurações</button></nav>
+<div id="storageWarning" class="notice error" role="alert" hidden></div>
+<div id="exampleNotice" class="notice" hidden>Davi e Maitê são times de exemplo. Você pode mudar os nomes em Configurações.</div>
+<main>
+<section id="page-classificacao" aria-labelledby="title-classificacao"><div class="card"><div class="section-head"><div><h2 id="title-classificacao">Classificação</h2><p>Vitória: 3 pontos · empate: 1 ponto · derrota: 0</p></div><span class="badge" id="progress">0 jogos</span></div><div class="table-wrap"><table><thead><tr><th scope="col">Time</th><th scope="col" title="Pontos">Pts</th><th scope="col" title="Jogos">J</th><th scope="col" title="Vitórias">V</th><th scope="col" title="Empates">E</th><th scope="col" title="Derrotas">D</th><th scope="col" title="Saldo de gols">SG</th><th scope="col" title="Gols pró">GP</th></tr></thead><tbody id="standings"></tbody></table></div><p class="legend">Desempate: pontos, saldo de gols, gols pró e nome. Deslize a tabela para ver todas as colunas.</p></div></section>
+<section id="page-simples" aria-labelledby="title-simples" hidden><div class="card"><div class="section-head"><div><h2 id="title-simples">Pontuação</h2><p>Use + ou − para ajustar os pontos de cada time.</p></div></div><div id="simplePoints"></div></div></section>
+<section id="page-jogos" aria-labelledby="title-jogos" hidden><div class="card"><div class="section-head"><div><h2 id="title-jogos">Jogos</h2><p>Preencha os dois placares para contar o resultado. Deixe em branco se ainda não aconteceu.</p></div></div><div id="matches"></div><p class="legend">Os placares aceitam números de 0 a 999. Um placar preenchido sozinho fica salvo, mas não conta na tabela.</p></div></section>
+<section id="page-configuracoes" aria-labelledby="title-configuracoes" hidden><div class="card"><div class="section-head"><div><h2>Modo do campeonato</h2><p>Os nomes são compartilhados. Os pontos simples e os resultados completos são independentes.</p></div></div><div class="mode-options" role="radiogroup" aria-label="Modo do campeonato"><label><input type="radio" name="mode" value="completo"> Completo</label><label><input type="radio" name="mode" value="simples"> Simplificado</label></div></div><div class="card"><div class="section-head"><div><h2 id="title-configuracoes">Configurações</h2><p>Edite os nomes sem perder os placares. Você pode ter de 2 a 16 times.</p></div><span class="badge" id="teamCount"></span></div><div id="teamList"></div><div class="new-team"><label for="newTeam">Adicionar time</label><div class="actions"><div><input class="text-input" id="newTeam" maxlength="60" placeholder="Nome do time" autocomplete="off"></div><button class="btn primary" type="button" id="addTeam">Adicionar</button></div><p class="hint" id="addHint">Adicionar ou remover times pode reorganizar as rodadas. Os outros placares permanecem.</p></div></div><div class="card danger-zone"><div class="section-head"><div><h2>Zerar pontuações e resultados</h2><p>Escolha o que zerar. A outra modalidade e os nomes dos times serão mantidos.</p></div></div><div class="actions"><button type="button" class="btn danger" id="resetResults">Limpar placares do modo completo</button><button type="button" class="btn danger" id="resetSimple">Zerar pontos do modo simplificado</button></div></div></section>
+</main>
+</div>
+<div class="modal-backdrop" id="confirmModal" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="dialogTitle" aria-describedby="dialogMessage"><h2 id="dialogTitle"></h2><p id="dialogMessage"></p><div class="actions"><button type="button" class="btn secondary" id="dialogCancel">Cancelar</button><button type="button" class="btn danger" id="dialogConfirm">Confirmar</button></div></div></div>
+<script src="./dados.js"></script>
+<script src="./telas.js"></script>
+<script src="./acoes.js"></script>
+
+<script>
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js', {scope: './'}).catch(function (error) { console.warn('Offline indisponível:', error); });
+  });
+}
+</script>
+</body>
+</html>
