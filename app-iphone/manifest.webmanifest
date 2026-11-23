@@ -1,0 +1,18 @@
+{
+  "name": "Campeonatos abertos",
+  "short_name": "Campeonatos",
+  "description": "Acompanhe os pontos e jogos do campeonato.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#120a20",
+  "theme_color": "#170c2b",
+  "icons": [
+    {
+      "src": "./icone.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
